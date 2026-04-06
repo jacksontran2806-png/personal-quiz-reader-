@@ -1,0 +1,371 @@
+/* ── Reset & Base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0f0f1a;
+  --card:    #1a1a2e;
+  --accent:  #e94560;
+  --accent2: #0f3460;
+  --text:    #eaeaea;
+  --muted:   #7a7a9a;
+  --success: #2ecc71;
+  --error:   #e74c3c;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', monospace;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+/* ── Splash ───────────────────────────────────────────────────────── */
+#splash {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999;
+  animation: fadeOut 0.5s ease 2.2s forwards;
+}
+
+.splash-inner {
+  text-align: center;
+  width: 460px;
+  background: var(--card);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(233,69,96,0.2);
+}
+
+.splash-accent { background: var(--accent); height: 4px; }
+
+.splash-inner p.splash-crafted {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 36px;
+  font-size: 16px;
+}
+
+.splash-inner h1.splash-name {
+  font-family: Georgia, serif;
+  font-size: 48px;
+  color: var(--accent);
+  margin: 10px 0 6px;
+  letter-spacing: 2px;
+}
+
+.splash-inner p.splash-title {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; pointer-events: none; }
+}
+
+/* ── App ──────────────────────────────────────────────────────────── */
+#app { max-width: 900px; margin: 0 auto; min-height: 100vh; position: relative; }
+
+.hidden { display: none !important; }
+
+.screen { display: none; flex-direction: column; min-height: 100vh; }
+.screen.active { display: flex; }
+
+/* ── Topbar ───────────────────────────────────────────────────────── */
+.topbar {
+  background: var(--accent2);
+  padding: 36px 60px 28px;
+  text-align: center;
+}
+
+.topbar h1 {
+  font-family: Georgia, serif;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.topbar p {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.accent-bar { background: var(--accent); height: 3px; }
+
+/* ── Body ─────────────────────────────────────────────────────────── */
+.body {
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+/* ── Wing photos ──────────────────────────────────────────────────── */
+.card-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.wing {
+  position: absolute;
+  width: 150px;
+  height: 190px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+  border: 2px solid var(--accent);
+  top: 50%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.wing-left {
+  left: -70px;
+  transform: translateY(-50%) rotate(-15deg) scaleX(-1);
+}
+
+.wing-right {
+  right: -70px;
+  transform: translateY(-50%) rotate(15deg);
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Cards ────────────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--accent2);
+  border-radius: 4px;
+  padding: 28px 32px;
+}
+
+.card-label {
+  font-weight: bold;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-size: 17px;
+}
+
+.card-sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.q-card p {
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: bold;
+}
+
+/* ── Textarea ─────────────────────────────────────────────────────── */
+textarea {
+  width: 100%;
+  height: 240px;
+  background: var(--bg);
+  border: 1px solid var(--accent2);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  padding: 16px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+}
+
+textarea:focus { border-color: var(--accent); }
+
+/* ── Buttons ──────────────────────────────────────────────────────── */
+.btn {
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  border-radius: 4px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  align-self: center;
+  min-width: 260px;
+}
+
+.btn:hover { background: #ff6b81; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-secondary { background: var(--accent2); }
+.btn-secondary:hover { background: #1a4a80; }
+
+.btn-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Divider ──────────────────────────────────────────────────────── */
+.divider {
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ── Muted text ───────────────────────────────────────────────────── */
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ── Progress bar ─────────────────────────────────────────────────── */
+.progress-wrap {
+  background: var(--accent2);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: var(--accent);
+  height: 100%;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ── Options ──────────────────────────────────────────────────────── */
+#options-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-btn {
+  background: var(--card);
+  border: 1px solid var(--accent2);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  padding: 16px 22px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: #1f1f3a;
+}
+
+.option-btn.selected {
+  border-color: var(--accent);
+  background: #1f1f3a;
+}
+
+.option-btn.correct {
+  border-color: var(--success);
+  background: rgba(46,204,113,0.1);
+  color: var(--success);
+}
+
+.option-btn.wrong {
+  border-color: var(--error);
+  background: rgba(231,76,60,0.1);
+  color: var(--error);
+}
+
+.option-btn:disabled { cursor: default; }
+
+/* ── Feedback ─────────────────────────────────────────────────────── */
+.feedback {
+  text-align: center;
+  font-weight: bold;
+  font-size: 17px;
+  min-height: 24px;
+}
+
+/* ── Score card ───────────────────────────────────────────────────── */
+.score-card {
+  text-align: center;
+  align-self: center;
+  min-width: 260px;
+}
+
+#score-display {
+  font-family: Georgia, serif;
+  font-size: 68px;
+  font-weight: bold;
+}
+
+/* ── Credit ───────────────────────────────────────────────────────── */
+.credit {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+/* ── Watermark ────────────────────────────────────────────────────── */
+.watermark {
+  position: fixed;
+  bottom: 12px;
+  right: 20px;
+  color: var(--muted);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* ── Flash animation ──────────────────────────────────────────────── */
+@keyframes flashPulse {
+  0%   { transform: scale(1);    background: var(--accent2); }
+  50%  { transform: scale(1.03); background: #2a2a4a; }
+  100% { transform: scale(1);    background: var(--accent2); }
+}
+
+.option-btn.flash {
+  animation: flashPulse 0.3s ease;
+}
+
+/* ── True/False buttons ───────────────────────────────────────────── */
+.yesno-btn {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 28px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+#options-wrap:has(.yesno-btn) {
+  flex-direction: row;
+  gap: 20px;
+}
+
+#options-wrap:has(.yesno-btn) .yesno-btn {
+  flex: 1;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .topbar { padding: 24px; }
+  .body { padding: 24px; }
+  .topbar h1 { font-size: 26px; }
+  textarea { font-size: 14px; height: 200px; }
+}
